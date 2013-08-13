@@ -159,10 +159,10 @@ sleep 10s
 echo ''
 
 # Run behat test.
+cd behat
 behat.phar
 
 # Give some friendly advice.
-cd behat
 echo ''
 echo 'Enter the command "behat.phar" to run all behat tests.'
 echo ''
