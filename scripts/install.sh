@@ -39,3 +39,5 @@ default:
       selenium2:   ~
 " >> behat.yml
 
+curl -o $DESTINATION/selenium-server.jar http://selenium.googlecode.com/files/selenium-server-standalone-2.31.0.jar
+
