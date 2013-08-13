@@ -1,4 +1,8 @@
 #!/bin/bash
+#
+# Execute this installer by copying and pasting the following into a terminal:
+# curl -O http://goo.gl/O52dLr && ./install.sh
+#
 
 echo -ne "Install php archives to directory (/usr/local/bin): "
 read DESTINATION
