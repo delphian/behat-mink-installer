@@ -57,11 +57,9 @@ fi
 getsrc() {
   (
     # Download file.
-    curl -o $2 $1;
-    # Retrieve just the name of the file from paramater 2.
-    FILE=`echo $2 | sed 's/.*\///'`
+    curl -o $2 $1
     # Apply permissions.
-    chmod $3 $FILE    
+    chmod $3 $2
   )
 }
 
