@@ -45,19 +45,32 @@ if [ -z $SED ]; then
   SED="sed"
 fi
 
+# Use curl to download a file, name it, and apply permissions.
+#
+# @param string $1
+#   Fully formed URL to download.
+# @param string $2
+#   Absolute path and filename to be saved.
+# @param int $3
+#   Permissions that should be assigned to file.
+#
 getsrc() {
-  ( 
+  (
     cd $2 > /dev/null;
-    curl -O $1;
-    FILE=`echo $1 | sed 's/.*\///'`
+    # Download file.
+    curl -o $2 $1;
+    # Retrieve just the name of the file from paramater 2.
+    FILE=`echo $2 | sed 's/.*\///'`
+    # Apply permissions.
     chmod $3 $FILE    
   )
 }
 
 # Download php archives and make behat.phar executable.
-getsrc http://behat.org/downloads/behat.phar $DESTINATION 744
-getsrc http://behat.org/downloads/mink.phar $DESTINATION 644
-getsrc http://behat.org/downloads/mink_extension.phar $DESTINATION 644
+getsrc http://behat.org/downloads/behat.phar $DESTINATION/behat.phar 744
+getsrc http://behat.org/downloads/mink.phar $DESTINATION/mink.phar 644
+getsrc http://behat.org/downloads/mink_extension.phar $DESTINATION/mink_extension.phar 644
+getsrc http://selenium.googlecode.com/files/selenium-server-standalone-2.31.0.jar $DESTINATION/selenium-server.jar 644
 
 mkdir behat
 cd behat
@@ -96,17 +109,9 @@ $SED -i -e "${LINE}i use Behat\\\MinkExtension\\\Context\\\MinkContext;" feature
 # Modify the default class to extend mink instead of behat.
 $SED -i -e "s/FeatureContext extends BehatContext/FeatureContext extends MinkContext/g" features/bootstrap/FeatureContext.php
 
-# Download the selenium server.
-# Execute this server with the following command:
-#
-# java -jar selenium-server.jar
-#
-# This server must always be running in the background for
+# The selenium server must always be running in the background for
 # behat to operate with mink. It's recommended that you start
 # the selenium server in it's own seperate shell.
-curl -o $DESTINATION/selenium-server.jar http://selenium.googlecode.com/files/selenium-server-standalone-2.31.0.jar
-
-# Go ahead and run the server in the background
 java -jar $DESTINATION/selenium-server.jar &
 
 # Remove the installer script.
