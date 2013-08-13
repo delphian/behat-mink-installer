@@ -18,5 +18,7 @@ Copy and paste this into your shell to install everything:
 curl -L -o bootstrap.sh http://goo.gl/0VxD7M && chmod 744 bootstrap.sh && ./bootstrap.sh
 ```
 
+#### Help and Support ####
+
 Feel free to contact me bryan.hazelbaker@gmail.com with any questions. Submit all bug reports or feature requests
 to the [Issue Queue](https://github.com/delphian/behat-mink-installer/issues)
