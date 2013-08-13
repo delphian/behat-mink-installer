@@ -66,6 +66,7 @@ if [ $WEBSITE == "http://www.google.com" ]; then
     As a user who just installed from bash
     I want to examine the default google site
 
+    @javascript
     Scenario: Viewing the google site
       Given I am on the homepage
       Then I should see "google"
