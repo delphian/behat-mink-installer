@@ -75,7 +75,7 @@ writeyml() {
     # Default to current directory.
     DIRECTORY="$1"
     if [ ! -d $DIRECTORY ]; then
-      DIRECTORY="./"
+      DIRECTORY="."
     fi
     echo "#behat.yml
 default:
@@ -99,7 +99,7 @@ writefeature() {
     # Default to current directory.
     DIRECTORY="$1"
     if [ ! -d $DIRECTORY ]; then
-      DIRECTORY="./"
+      DIRECTORY="."
     fi
     echo '
 Feature: Test out new installation of behat and mink.
