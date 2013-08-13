@@ -109,5 +109,8 @@ java -jar $DESTINATION/selenium-server.jar &
 # Remove the installer script.
 rm ../bootstrap.sh
 
+# Wait for selenium to boot up.
+sleep 5s
+
 # Run behat test.
 behat.phar
