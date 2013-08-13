@@ -55,7 +55,7 @@ fi
 # @param int $3
 #   Permissions that should be assigned to file.
 #
-getsrc() {
+download() {
   (
     # Download file.
     echo "$1"
@@ -65,18 +65,18 @@ getsrc() {
   )
 }
 
-# Download php archives and make behat.phar executable.
-getsrc http://behat.org/downloads/behat.phar $DESTINATION/behat.phar 744
-getsrc http://behat.org/downloads/mink.phar $DESTINATION/mink.phar 644
-getsrc http://behat.org/downloads/mink_extension.phar $DESTINATION/mink_extension.phar 644
-getsrc http://selenium.googlecode.com/files/selenium-server-standalone-2.31.0.jar $DESTINATION/selenium-server.jar 644
-
-mkdir behat
-cd behat
-$DESTINATION/behat.phar --init
-
 # Generate yaml file instructing behat where to find the php archives.
-echo "#behat.yml
+#
+# @param string $1
+#   (optional) Directory to write yaml file into.
+#
+writeyml() {
+  (
+    # Default to current directory.
+    if [ -z $1 ]; then
+      1="./"
+    fi
+    echo "#behat.yml
 default:
   extensions:
     $DESTINATION/mink_extension.phar:
@@ -84,21 +84,51 @@ default:
       base_url:    '$WEBSITE'
       goutte:      ~
       selenium2:   ~
-" >> behat.yml
+    " >> $1/behat.yml
+  )
+}
 
-# Create sample feature.
+# Generate example feature file that will test google home page.
+#
+# @param string $1
+#   (optional) Directory to write feature file into.
+#
+writefeature() {
+  (
+    # Default to current directory.
+    if [ -z $1 ]; then
+      1="./"
+    fi
+    echo '
+Feature: Test out new installation of behat and mink.
+  In order to display the power of behat and mink
+  As a user who just installed from bash
+  I want to examine the default google site
+
+  @javascript
+  Scenario: Viewing the google site
+    Given I am on the homepage
+    Then I should see "google"
+  ' >> $1/example.feature
+  )
+}
+
+# Download php archives and make behat.phar executable.
+download http://behat.org/downloads/behat.phar $DESTINATION/behat.phar 744
+download http://behat.org/downloads/mink.phar $DESTINATION/mink.phar 644
+download http://behat.org/downloads/mink_extension.phar $DESTINATION/mink_extension.phar 644
+download http://selenium.googlecode.com/files/selenium-server-standalone-2.31.0.jar $DESTINATION/selenium-server.jar 644
+echo ''
+
+mkdir behat
+cd behat
+$DESTINATION/behat.phar --init
+
+# Write yml file.
+writeyml
+# Write example feature.
 if [ $WEBSITE == "http://www.google.com" ]; then
-  echo '
-  Feature: Test out new installation of behat and mink.
-    In order to display the power of behat and mink
-    As a user who just installed from bash
-    I want to examine the default google site
-
-    @javascript
-    Scenario: Viewing the google site
-      Given I am on the homepage
-      Then I should see "google"
-  ' >> features/example.feature
+  writefeature features
 fi
 
 # Include MinkContext class after second semicolon.
@@ -118,6 +148,7 @@ rm ../bootstrap.sh
 
 # Wait for selenium to boot up.
 sleep 10s
+echo ''
 
 # Run behat test.
 behat.phar
