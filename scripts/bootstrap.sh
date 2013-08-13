@@ -53,7 +53,7 @@ default:
 
 # Include MinkContext class after second semicolon.
 LINE=`grep -n ";" features/bootstrap/FeatureContext.php | cut -f1 -d: | head -2 | tail -1`
-sed -i "" -e "$LINEi use Behat\MinkExtension\Context\MinkContext;"
+sed -i "" -e "$LINEi use Behat\MinkExtension\Context\MinkContext;" features/bootstrap/FeatureContext.php
 # Modify the default class to extend mink instead of behat.
 sed -i "" -e "s/FeatureContext extends BehatContext/FeatureContext extends MinkContext/g" features/bootstrap/FeatureContext.php
 
@@ -68,4 +68,9 @@ curl -o $DESTINATION/selenium-server.jar http://selenium.googlecode.com/files/se
 
 # Go ahead and run the server in the background
 java -jar $DESTINATION/selenium-server.jar &
+
+# Remove the installer script.
+cd ..
+rm bootstrap.sh
+
 
