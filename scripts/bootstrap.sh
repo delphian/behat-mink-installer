@@ -8,6 +8,8 @@
 #
 # https://github.com/delphian/behat-mink-installer/blob/master/scripts/bootstrap.sh
 #
+# This script requires curl, java, and firefox be installed first.
+#
 
 echo ''
 echo -ne "Install php archives to directory (/usr/local/bin): "
