@@ -11,6 +11,18 @@
 # This script requires curl, java, and firefox be installed first.
 #
 
+# Demand that requirements are met.
+CURL=`command -v curl`
+if [ -z $CURL ]; then
+  echo 'Curl not found. Please install curl first.'
+  exit 1
+fi
+JAVA=`command -v java`
+if [ -z $JAVA ]; then
+  echo 'Java not found. Please install java runtime first.'
+  exit 1
+fi
+
 echo ''
 echo -ne "Install php archives to directory (/usr/local/bin): "
 read DESTINATION
