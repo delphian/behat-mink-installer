@@ -12,7 +12,7 @@ Released under the MIT license. Read the entire license located in the project r
 
 #### Installation ####
 
-Copy and paste this into your shell to install everything:
+First navigate to your project folder then copy and paste this into your shell to install everything:
 
 ```
 curl -L -o bootstrap.sh http://goo.gl/0VxD7M && chmod 744 bootstrap.sh && ./bootstrap.sh
