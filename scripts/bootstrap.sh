@@ -8,7 +8,9 @@
 #
 # https://github.com/delphian/behat-mink-installer/blob/master/scripts/bootstrap.sh
 #
-# This script requires curl, java, and firefox be installed first.
+# This script requires curl, java, and firefox be installed first. Please see
+# https://github.com/delphian/behat-mink-installer/wiki for further details.
+# Submit questions to https://github.com/delphian/behat-mink-installer/issues
 #
 
 # Demand that requirements are met.
@@ -100,7 +102,8 @@ $SED -i -e "s/FeatureContext extends BehatContext/FeatureContext extends MinkCon
 # java -jar selenium-server.jar
 #
 # This server must always be running in the background for
-# behat to operate with mink.
+# behat to operate with mink. It's recommended that you start
+# the selenium server in it's own seperate shell.
 curl -o $DESTINATION/selenium-server.jar http://selenium.googlecode.com/files/selenium-server-standalone-2.31.0.jar
 
 # Go ahead and run the server in the background
