@@ -3,7 +3,7 @@ Behat Mink Installer
 
 Please see this original document at https://github.com/delphian/behat-mink-installer/wiki
 
-Easy installation of behat and mink extension for testing by copying and pasting a single line into the shell.
+Easy installation of behat with mink extension. Copy and paste a single line into the shell to install.
 
 #### License ####
 
@@ -17,6 +17,18 @@ Copy and paste this into your shell to install everything:
 ```
 curl -L -o bootstrap.sh http://goo.gl/0VxD7M && chmod 744 bootstrap.sh && ./bootstrap.sh
 ```
+
+Installation script will:
+
+* Dwonload php archives into /usr/local/bin:
+  * behat.phar (and makes executable)
+  * mink.phar
+  * mink_extension.phar
+* Create yaml configuration file to point behat at mink php archives.
+* Modifies default behat class to extend MinkContext.
+* Create example feature file that examines the google home page.
+* Downloads selenium2 server to /usr/local/bin and launches in background.
+* Launches behat test of google home page (firefox will open).
 
 #### Help and Support ####
 
