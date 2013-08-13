@@ -59,7 +59,7 @@ default:
 " >> behat.yml
 
 # Create sample feature.
-if [ $WEBSITE eq "http://www.google.com" ]; then
+if [ $WEBSITE == "http://www.google.com" ]; then
   echo "
   Feature: Test out new installation of behat and mink.
     In order to display the power of behat and mink
