@@ -1,9 +1,11 @@
 #!/bin/bash
 #
 # Execute this installer by copying and pasting the following into a terminal:
+#
 # curl -L -s http://goo.gl/0VxD7M | bash
 #
 # The original bootstrap file may be viewed at:
+#
 # https://github.com/delphian/behat-mink-installer/blob/master/scripts/bootstrap.sh
 #
 
@@ -13,10 +15,10 @@ if [ -z $DESTINATION ]; then
   DESTINATION="/usr/local/bin"
 fi
 
-echo -ne "Website (http://local.localhost.com): "
+echo -ne "Website (http://www.google.com): "
 read WEBSITE
 if [ -z $WEBSITE]; then
-  WEBSITE="http://local.localhost.com"
+  WEBSITE="http://www.google.com"
 fi
 
 getsrc() {
@@ -28,6 +30,7 @@ getsrc() {
   )
 }
 
+# Download php archives and make behat.phar executable.
 getsrc http://behat.org/downloads/behat.phar $DESTINATION 744
 getsrc http://behat.org/downloads/mink.phar $DESTINATION 644
 getsrc http://behat.org/downloads/mink_extension.phar $DESTINATION 644
@@ -36,6 +39,7 @@ mkdir behat
 cd behat
 $DESTINATION/behat.phar --init
 
+# Generate yaml file instructing behat where to find the php archives.
 echo "#behat.yml
 default:
   extensions:
@@ -46,5 +50,18 @@ default:
       selenium2:   ~
 " >> behat.yml
 
+# Modify the default class to extend mink instead of behat.
+
+
+# Download the selenium server.
+# Execute this server with the following command:
+#
+# java -jar selenium-server.jar
+#
+# This server must always be running in the background for
+# behat to operate with mink.
 curl -o $DESTINATION/selenium-server.jar http://selenium.googlecode.com/files/selenium-server-standalone-2.31.0.jar
+
+# Go ahead and run the server in the background
+java -jar $DESTINATION/selenium-server.jar
 
