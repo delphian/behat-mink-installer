@@ -112,7 +112,7 @@ $SED -i -e "s/FeatureContext extends BehatContext/FeatureContext extends MinkCon
 # The selenium server must always be running in the background for
 # behat to operate with mink. It's recommended that you start
 # the selenium server in it's own seperate shell.
-java -jar $DESTINATION/selenium-server.jar &
+java -jar $DESTINATION/selenium-server.jar > /dev/null &
 
 # Remove the installer script.
 rm ../bootstrap.sh
