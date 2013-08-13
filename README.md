@@ -24,6 +24,7 @@ Installation script will:
   * behat.phar (and makes executable)
   * mink.phar
   * mink_extension.phar
+* Create `behat` in current directory to hold yaml configuration and feature tests.
 * Create yaml configuration file to point behat at mink php archives.
 * Modifies default behat class to extend MinkContext.
 * Create example feature file that examines the google home page.
