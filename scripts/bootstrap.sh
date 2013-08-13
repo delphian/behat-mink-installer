@@ -51,8 +51,11 @@ default:
       selenium2:   ~
 " >> behat.yml
 
+# Include MinkContext class after second semicolon.
+LINE=`grep -n ";" features/bootstrap/FeatureContext.php | cut -f1 -d: | head -2 | tail -1`
+sed -i "" -e "$LINEi use Behat\MinkExtension\Context\MinkContext;"
 # Modify the default class to extend mink instead of behat.
-
+sed -i "" -e "s/FeatureContext extends BehatContext/FeatureContext extends MinkContext/g" features/bootstrap/FeatureContext.php
 
 # Download the selenium server.
 # Execute this server with the following command:
