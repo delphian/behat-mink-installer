@@ -2,7 +2,7 @@
 #
 # Execute this installer by copying and pasting the following into a terminal:
 #
-# curl -L -o bootstrap.sh http://goo.gl/0VxD7M && chmod 744 bootstrap.sh && ./bootstrap.sh
+# curl -# -L -o bootstrap.sh http://goo.gl/0VxD7M && chmod 744 bootstrap.sh && ./bootstrap.sh
 #
 # The original bootstrap file may be viewed at:
 #
@@ -37,6 +37,7 @@ read WEBSITE
 if [ -z $WEBSITE]; then
   WEBSITE="http://www.google.com"
 fi
+echo ''
 
 # Look for GNU sed. gsed is used on MAC OSX. This is because MAC OSX sed does
 # not operate the same as GNU sed and will reject some parameters.
@@ -57,7 +58,7 @@ fi
 getsrc() {
   (
     # Download file.
-    curl –# --output $2 $1
+    curl –# -o $2 $1
     # Apply permissions.
     chmod $3 $2
   )
