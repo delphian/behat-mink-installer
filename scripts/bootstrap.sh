@@ -2,7 +2,7 @@
 #
 # Execute this installer by copying and pasting the following into a terminal:
 #
-# curl -L -s http://goo.gl/0VxD7M | bash
+# curl -O http://goo.gl/0VxD7M && ./bootstrap.sh
 #
 # The original bootstrap file may be viewed at:
 #
@@ -63,5 +63,5 @@ default:
 curl -o $DESTINATION/selenium-server.jar http://selenium.googlecode.com/files/selenium-server-standalone-2.31.0.jar
 
 # Go ahead and run the server in the background
-java -jar $DESTINATION/selenium-server.jar
+java -jar $DESTINATION/selenium-server.jar &
 
