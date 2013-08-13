@@ -72,9 +72,9 @@ download() {
 #
 writeyml() {
   (
-    # Default to current directory.
     DIRECTORY="$1"
-    if [ ! -d $DIRECTORY ]; then
+    # Default to current directory.
+    if [ ! -d "$DIRECTORY" ]; then
       DIRECTORY="."
     fi
     echo "#behat.yml
@@ -96,9 +96,9 @@ default:
 #
 writefeature() {
   (
-    # Default to current directory.
     DIRECTORY="$1"
-    if [ ! -d $DIRECTORY ]; then
+    # Default to current directory.
+    if [ ! -d "$DIRECTORY" ]; then
       DIRECTORY="."
     fi
     echo '
