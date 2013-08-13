@@ -22,6 +22,13 @@ if [ -z $WEBSITE]; then
   WEBSITE="http://www.google.com"
 fi
 
+# Look for GNU sed. gsed is used on MAC OSX. This is because MAC OSX sed does
+# not operate the same as GNU sed and will reject some parameters.
+SED=`command -v gsed`
+if [ -z $SED ]; then
+  SED="sed"
+fi
+
 getsrc() {
   ( 
     cd $2 > /dev/null;
@@ -53,9 +60,9 @@ default:
 
 # Include MinkContext class after second semicolon.
 LINE=`grep -n ";" features/bootstrap/FeatureContext.php | cut -f1 -d: | head -2 | tail -1`
-sed -i "" -e "$LINEi use Behat\MinkExtension\Context\MinkContext;" features/bootstrap/FeatureContext.php
+$SED -i -e "$LINEi\use Behat\MinkExtension\Context\MinkContext;" features/bootstrap/FeatureContext.php
 # Modify the default class to extend mink instead of behat.
-sed -i "" -e "s/FeatureContext extends BehatContext/FeatureContext extends MinkContext/g" features/bootstrap/FeatureContext.php
+$SED -i -e "s/FeatureContext extends BehatContext/FeatureContext extends MinkContext/g" features/bootstrap/FeatureContext.php
 
 # Download the selenium server.
 # Execute this server with the following command:
@@ -70,7 +77,7 @@ curl -o $DESTINATION/selenium-server.jar http://selenium.googlecode.com/files/se
 java -jar $DESTINATION/selenium-server.jar &
 
 # Remove the installer script.
-cd ..
-rm bootstrap.sh
+rm ../bootstrap.sh
 
-
+# Run behat test.
+behat.phar
