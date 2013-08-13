@@ -58,6 +58,20 @@ default:
       selenium2:   ~
 " >> behat.yml
 
+# Create sample feature.
+if [ $WEBSITE eq "http://www.google.com" ]; then
+  echo "
+  Feature: Test out new installation of behat and mink.
+    In order to display the power of behat and mink
+    As a user who just installed from bash
+    I want to examine the default google site
+
+    Scenario: Viewing the google site
+      Given I am on "/"
+      Then I should see "google"
+  " >> features/example.feature
+fi
+
 # Include MinkContext class after second semicolon.
 LINE=`grep -n ";" features/bootstrap/FeatureContext.php | cut -f1 -d: | head -2 | tail -1`
 LINE=$(( $LINE+1 ))
