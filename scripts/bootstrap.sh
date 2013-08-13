@@ -122,23 +122,29 @@ download http://behat.org/downloads/mink_extension.phar $DESTINATION/mink_extens
 download http://selenium.googlecode.com/files/selenium-server-standalone-2.31.0.jar $DESTINATION/selenium-server.jar 644
 echo ''
 
-mkdir behat
-cd behat
-$DESTINATION/behat.phar --init
+# Only install behat directory if it is not present. If it is already present
+# it may be part of a repo and already configured.
+if [ ! -d "behat" ]; then
+  mkdir behat
+  cd behat
+  $DESTINATION/behat.phar --init
+  echo ''
 
-# Write yml file.
-writeyml
-# Write example feature.
-if [ $WEBSITE == "http://www.google.com" ]; then
-  writefeature features
+  # Write yml file.
+  writeyml
+  # Write example feature.
+  if [ $WEBSITE == "http://www.google.com" ]; then
+    writefeature features
+  fi
+
+  # Include MinkContext class after second semicolon.
+  LINE=`grep -n ";" features/bootstrap/FeatureContext.php | cut -f1 -d: | head -2 | tail -1`
+  LINE=$(( $LINE+1 ))
+  $SED -i -e "${LINE}i use Behat\\\MinkExtension\\\Context\\\MinkContext;" features/bootstrap/FeatureContext.php
+  # Modify the default class to extend mink instead of behat.
+  $SED -i -e "s/FeatureContext extends BehatContext/FeatureContext extends MinkContext/g" features/bootstrap/FeatureContext.php
+  cd ..
 fi
-
-# Include MinkContext class after second semicolon.
-LINE=`grep -n ";" features/bootstrap/FeatureContext.php | cut -f1 -d: | head -2 | tail -1`
-LINE=$(( $LINE+1 ))
-$SED -i -e "${LINE}i use Behat\\\MinkExtension\\\Context\\\MinkContext;" features/bootstrap/FeatureContext.php
-# Modify the default class to extend mink instead of behat.
-$SED -i -e "s/FeatureContext extends BehatContext/FeatureContext extends MinkContext/g" features/bootstrap/FeatureContext.php
 
 # The selenium server must always be running in the background for
 # behat to operate with mink. It's recommended that you start
@@ -146,7 +152,7 @@ $SED -i -e "s/FeatureContext extends BehatContext/FeatureContext extends MinkCon
 java -jar $DESTINATION/selenium-server.jar > /dev/null &
 
 # Remove the installer script.
-rm ../bootstrap.sh
+rm bootstrap.sh
 
 # Wait for selenium to boot up.
 sleep 10s
@@ -154,3 +160,12 @@ echo ''
 
 # Run behat test.
 behat.phar
+
+# Give some friendly advice.
+cd behat
+echo ''
+echo 'Enter the command "behat.phar" to run all behat tests.'
+echo ''
+echo 'If you close this terminal you must relaunch the selenium2 server with the command:'
+echo "java -jar $DESTINATION/selenium-server.jar"
+echo ''
