@@ -58,7 +58,8 @@ fi
 getsrc() {
   (
     # Download file.
-    curl –# -o $2 $1
+    echo "$1"
+    curl -o $2 $1 -#
     # Apply permissions.
     chmod $3 $2
   )
