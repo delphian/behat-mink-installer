@@ -20,7 +20,7 @@ curl -L -o bootstrap.sh http://goo.gl/0VxD7M && chmod 744 bootstrap.sh && ./boot
 
 Installation script will:
 
-* Dwonload php archives into /usr/local/bin:
+* Download php archives into /usr/local/bin:
   * behat.phar (and makes executable)
   * mink.phar
   * mink_extension.phar
