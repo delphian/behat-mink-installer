@@ -2,13 +2,14 @@
 #
 # Execute this installer by copying and pasting the following into a terminal:
 #
-# curl -O http://goo.gl/0VxD7M && ./bootstrap.sh
+# curl -L -o bootstrap.sh http://goo.gl/0VxD7M && chmod 744 bootstrap.sh && ./bootstrap.sh
 #
 # The original bootstrap file may be viewed at:
 #
 # https://github.com/delphian/behat-mink-installer/blob/master/scripts/bootstrap.sh
 #
 
+echo ''
 echo -ne "Install php archives to directory (/usr/local/bin): "
 read DESTINATION
 if [ -z $DESTINATION ]; then
