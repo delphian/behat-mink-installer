@@ -73,8 +73,9 @@ download() {
 writeyml() {
   (
     # Default to current directory.
-    if [ -z $1 ]; then
-      1="./"
+    DIRECTORY="$1"
+    if [ ! -d $DIRECTORY ]; then
+      DIRECTORY="./"
     fi
     echo "#behat.yml
 default:
@@ -84,7 +85,7 @@ default:
       base_url:    '$WEBSITE'
       goutte:      ~
       selenium2:   ~
-    " >> $1/behat.yml
+    " >> $DIRECTORY/behat.yml
   )
 }
 
@@ -96,8 +97,9 @@ default:
 writefeature() {
   (
     # Default to current directory.
-    if [ -z $1 ]; then
-      1="./"
+    DIRECTORY="$1"
+    if [ ! -d $DIRECTORY ]; then
+      DIRECTORY="./"
     fi
     echo '
 Feature: Test out new installation of behat and mink.
@@ -109,7 +111,7 @@ Feature: Test out new installation of behat and mink.
   Scenario: Viewing the google site
     Given I am on the homepage
     Then I should see "google"
-  ' >> $1/example.feature
+  ' >> $DIRECTORY/example.feature
   )
 }
 
