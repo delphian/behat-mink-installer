@@ -110,7 +110,7 @@ java -jar $DESTINATION/selenium-server.jar &
 rm ../bootstrap.sh
 
 # Wait for selenium to boot up.
-sleep 5s
+sleep 10s
 
 # Run behat test.
 behat.phar
