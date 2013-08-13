@@ -34,4 +34,5 @@ Installation script will:
 #### Help and Support ####
 
 Feel free to contact me bryan.hazelbaker@gmail.com with any questions. Submit all bug reports or feature requests
-to the [Issue Queue](https://github.com/delphian/behat-mink-installer/issues)
+to the [Issue Queue](https://github.com/delphian/behat-mink-installer/issues). Please see this original document
+at https://github.com/delphian/behat-mink-installer/wiki for more information.
