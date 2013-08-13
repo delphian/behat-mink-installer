@@ -57,7 +57,7 @@ fi
 getsrc() {
   (
     # Download file.
-    curl -o $2 $1
+    curl –silent -o $2 $1
     # Apply permissions.
     chmod $3 $2
   )
