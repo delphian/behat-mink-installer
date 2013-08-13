@@ -60,16 +60,16 @@ default:
 
 # Create sample feature.
 if [ $WEBSITE == "http://www.google.com" ]; then
-  echo "
+  echo '
   Feature: Test out new installation of behat and mink.
     In order to display the power of behat and mink
     As a user who just installed from bash
     I want to examine the default google site
 
     Scenario: Viewing the google site
-      Given I am on "/"
+      Given I am on the homepage
       Then I should see "google"
-  " >> features/example.feature
+  ' >> features/example.feature
 fi
 
 # Include MinkContext class after second semicolon.
