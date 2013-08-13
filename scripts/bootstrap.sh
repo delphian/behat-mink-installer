@@ -56,7 +56,6 @@ fi
 #
 getsrc() {
   (
-    cd $2 > /dev/null;
     # Download file.
     curl -o $2 $1;
     # Retrieve just the name of the file from paramater 2.
