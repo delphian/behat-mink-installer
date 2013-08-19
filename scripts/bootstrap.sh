@@ -83,7 +83,13 @@ default:
     $DESTINATION/mink_extension.phar:
       mink_loader: '$DESTINATION/mink.phar'
       base_url:    '$WEBSITE'
-      goutte:      ~
+      goutte:
+          guzzle_parameters:
+           curl.options:
+              CURLOPT_SSL_VERIFYPEER: false
+              CURLOPT_CERTINFO: false
+              CURLOPT_TIMEOUT: 120
+           ssl.certificate_authority: false
       selenium2:   ~
     " >> $DIRECTORY/behat.yml
   )
