@@ -26,13 +26,13 @@ if [ -z $JAVA ]; then
 fi
 
 echo ''
-echo -ne "Install php archives to directory (/usr/local/bin): "
+echo -ne "Install php archives to directory [press enter for /usr/local/bin]: "
 read DESTINATION
 if [ -z $DESTINATION ]; then
   DESTINATION="/usr/local/bin"
 fi
 
-echo -ne "Website (http://www.google.com): "
+echo -ne "Website [press enter for http://www.google.com]: "
 read WEBSITE
 if [ -z $WEBSITE ]; then
   WEBSITE="http://www.google.com"
