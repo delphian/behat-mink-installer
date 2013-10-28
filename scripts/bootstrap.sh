@@ -146,9 +146,9 @@ if [ ! -d "behat" ]; then
   # Include MinkContext class after second semicolon.
   LINE=`grep -n ";" features/bootstrap/FeatureContext.php | cut -f1 -d: | head -2 | tail -1`
   LINE=$(( $LINE+1 ))
-  $SED -i '' "${LINE}i use Behat\\\MinkExtension\\\Context\\\MinkContext;" features/bootstrap/FeatureContext.php
+  $SED -i'' -e "${LINE}i use Behat\\\MinkExtension\\\Context\\\MinkContext;" features/bootstrap/FeatureContext.php
   # Modify the default class to extend mink instead of behat.
-  $SED -i '' "s/FeatureContext extends BehatContext/FeatureContext extends MinkContext/g" features/bootstrap/FeatureContext.php
+  $SED -i'' -e "s/FeatureContext extends BehatContext/FeatureContext extends MinkContext/g" features/bootstrap/FeatureContext.php
   cd ..
 fi
 
