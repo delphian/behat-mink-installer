@@ -34,7 +34,7 @@ fi
 
 echo -ne "Website (http://www.google.com): "
 read WEBSITE
-if [ -z $WEBSITE]; then
+if [ -z $WEBSITE ]; then
   WEBSITE="http://www.google.com"
 fi
 echo ''
